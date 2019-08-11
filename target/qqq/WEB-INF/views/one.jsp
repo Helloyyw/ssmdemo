@@ -4,38 +4,28 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>维修系统</title>
+    <title>在线通讯录</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="../../js/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="../../js/bootstrap.min.js"></script>
-
     <script type="text/javascript">
 
          function send(){
-               var name  = $("#name").val();
-               var type = $("#type").val()
-             alert("hah");
-             window.location.href="http://localhost:8080/weixiu/one1?name="+name+"&type="+type;
+             var name  ="";
+             var phone  ="";
+               if( !($("#name").val() ==null) ||  !($("#name").val() == "") ){
+                   name =  $("#name").val();
+              }
+             if( $("#phone").val() !=null ||  $("#phone").val() != "" ){
+                 phone = $("#phone").val();
+             }
 
-                // $.ajax({
-                //     type: "POST",
-                //     url: "http://localhost:8080/weixiu/one1",
-                //     dataType:"json",
-                //     async:true,
-                //     data:"name="+$("#name").val()+"&type="+$("#type").val(),
-                //     success:function(result){
-                //      //   $("#yy").html(info(data));
-                //     }
-                // });
+               alert(name +phone);
+             window.location.href="http://localhost:8080/weixiu/findTel?name="+name+"&phone="+phone;
          }
-         function type1() {
-           //   alert("shsh");
-            alert($("#type1").val());
-            var type = $("#type1").val();
-             window.location.href="http://localhost:8080/weixiu/type?type="+type;
-         }
+
     </script>
 </head>
 <body >
@@ -43,38 +33,18 @@
     <div style="margin-top:50px;margin-left: 300px">
     <div class="row-fluid">
         <div class="span12">
-            <h3>维修作业差错防范系统框架设计</h3>
-            <p>
-                <em></em><strong>维修作业差错防范系统框架设计</strong>点击不同的故障名称  下面会显示出故障名称对应的
-                后果 和 相应的原因  以文字的形式 显示相应的防范措施
-            </p>
+            <h3>欢迎！！登录通讯录</h3>
             <br>
-                你可以在这里输入你要搜索的错误描述：
-                <input type="text" id="name" class="alert-primary" style="border-radius: 6px;border: 1px solid   " placeholder="请输入..." >
-              <br>
-              <br>
-                请选择错误的类型:
-                <select class="text" id="type" class="btn-primary">
-                    <option>维修前差错</option>
-                    <option>维修中差错</option>
-                    <option>维修后差错</option>
-                </select>
-                <br>
-                <button class="btn btn-primary" onclick="send()" type="button" >组合搜索</button>
+           姓名搜索：
+            <input type="text" id="name" class="alert-primary" style="border-radius: 6px;border: 1px solid   " placeholder="请输入姓名" >
+           电话搜索：
+            <input type="text" id="phone" class="alert-primary" style="border-radius: 6px;border: 1px solid   " placeholder="请输入电话">
+            <input class="btn btn-primary" onclick="send()" type="button" >搜索</input>
         </div>
     </div>
-        <br>
-        单独根据错误的类型查:
-        <select class="text" id="type1" class="btn-primary" >
-            <option>维修前差错</option>
-            <option>维修中差错</option>
-            <option>维修后差错</option>
-        </select>
-        <button class="btn btn-primary" onclick="type1()" type="button" >类型搜索</button>
     </div>
     <br>
-     <a class="btn btn-primary" href="<%=request.getContextPath()%>/weixiu/add">点我添加数据</a>
-
+    <div><%--<a class="btn btn-primary" href="<%=request.getContextPath()%>/weixiu/add">点我添加数据</a>--%></div>
             <table id="mytable" class="table table-bordered" style="border: 1px  solid red;margin-top: 20px">
                 <thead class="title">
                 <tr class="alert-primary">
@@ -82,19 +52,19 @@
                         编号
                     </th>
                     <th>
-                        错误描述
+                        联系人姓名
                     </th>
                     <th>
-                        错误类型
+                        电话
                     </th>
                     <th>
-                        后果
+                        性别
                     </th>
                     <th>
-                        错误原因
+                        备注
                     </th>
                     <th>
-                        有效措施
+                        操作
                     </th>
 
                 </tr>
@@ -109,16 +79,17 @@
                                 ${s.name}
                         </td>
                         <td>
-                                ${s.type}
+                                ${s.sex}
                         </td>
                         <td>
-                                ${s.houguo}
+                                ${s.phone}
                         </td>
                         <td>
-                                ${s.yuanyin}
+                                ${s.text}
                         </td>
                         <td>
-                                ${s.cuoshi}
+                              <a href="#">修改</a>
+                              <a href="#">删除</a>
                         </td>
                     </tr>
                 </c:forEach>

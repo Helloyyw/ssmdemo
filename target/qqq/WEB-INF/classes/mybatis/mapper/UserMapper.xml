@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ziro.mapper.UserMapper">
-    <select id="findByName" parameterType="string" resultType="WeiXiuEntity">
-        select * from table1 where name like #{name} and type = #{type};
+    <select id="findByName" resultType="com.ziro.entity.TelPhoneEntity">
+        select * from table1 where name like name = #{name} and phone = #{type};
     </select>
-    <insert id="addData" parameterType="WeiXiuEntity">
+    <insert id="addData" parameterType="com.ziro.entity.WeiXiuEntity">
         insert into table1(name,type,yuanyin,cuoshi,houguo) values (#{name},#{type},#{yuanyin},#{cuoshi},#{houguo})
     </insert>
-    <select id="findAll" resultType="WeiXiuEntity">
+    <select id="findAll" resultType="com.ziro.entity.WeiXiuEntity">
          select * from table1
     </select>
-    <select id="findByType" resultType="WeiXiuEntity">
+    <select id="findByType" resultType="com.ziro.entity.WeiXiuEntity">
          select * from table1 where type = #{type};
     </select>
 
+    <select id="check" resultType="com.ziro.entity.UserEntity">
+         select * from user where name  = #{name} and pwd = #{pwd};
+    </select>
+
+    <select id="findAllPerson" resultType="com.ziro.entity.TelPhoneEntity">
+         select * from telphone
+    </select>
+
+    <select id="findByName1" resultType="com.ziro.entity.TelPhoneEntity">
+         select * from telphone where name =#{name1}
+    </select>
+    <select id="findByName2" resultType="com.ziro.entity.TelPhoneEntity">
+         select * from telphone where phone =#{phone}
+    </select>
 </mapper>
